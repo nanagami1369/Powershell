@@ -1,9 +1,9 @@
 function Start-fishShell {
-	wsl fish
+	wsl fish $args
 }
 New-Alias -Name fish -Value Start-fishShell
 function Get-AllItem {
-	Get-ChildItem -Force
+	Get-ChildItem -Force $args
 }
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
