@@ -1,2 +1,4 @@
 posh-git/
 posh-vagrant
+.vscode/
+powershell.config.json
