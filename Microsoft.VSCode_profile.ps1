@@ -8,7 +8,15 @@ Set-Variable -Scope "Global" -Option "Constant" -Name "StartFolder" -Value $PWD
 Set-PSReadlineOption -BellStyle None
 
 #おまじない
-Get-ChildItem $HOME\OneDrive\vscode\PowerShell\Modules|Import-Module
+Get-ChildItem $HOME\OneDrive\vscode\PowerShell\Modules | Import-Module
+#ESC文字の登録(文字色の変換に使う)
+$ESC = [char]27
+
+#promptの修正
+function prompt() {
+	[string]$Prompt = Get-Location
+	"$ESC[32m" + ($Prompt.Replace($HOME, "$ESC[0m~$ESC[32m")) + "$ESC[0m>"
+}
 
 # 起動時のコメント
 Write-Host "Welcome to my PowerShell.exe" -ForegroundColor Blue
