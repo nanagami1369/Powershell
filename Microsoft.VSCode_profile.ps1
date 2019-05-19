@@ -1,5 +1,5 @@
 #helpコマンドが文字化けを起こすので治るまでUTF-8にしない
-# chcp 65001
+chcp 65001
 
 #起動時のフォルダーを取得
 Set-Variable -Scope "Global" -Option "Constant" -Name "StartFolder" -Value $PWD
