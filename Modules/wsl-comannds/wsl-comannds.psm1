@@ -7,5 +7,9 @@ function Get-AllItem {
 }
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
-Export-ModuleMember -Function Start-fishShell, Get-AllItem
-Export-ModuleMember -Alias fish, ll, la
+function Get-Env {
+	Get-ChildItem Env:*$args*
+}
+New-Alias printenv Get-Env
+Export-ModuleMember -Function Start-fishShell, Get-AllItem,Get-Env
+Export-ModuleMember -Alias fish, ll, la, printenv
