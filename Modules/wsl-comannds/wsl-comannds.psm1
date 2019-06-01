@@ -23,6 +23,6 @@ function Get-Env {
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
 New-Alias -Name touch -Value Update-Item
-New-Alias -Name env -Value Get-Env
+New-Alias -Name printenv -Value Get-Env
 Export-ModuleMember -Function Start-fishShell, Get-AllItem, Update-Item, Get-Env
-Export-ModuleMember -Alias fish, ll, la, touch, env
+Export-ModuleMember -Alias fish, ll, la, touch, printenv
