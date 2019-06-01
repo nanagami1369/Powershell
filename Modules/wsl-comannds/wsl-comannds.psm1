@@ -17,8 +17,12 @@ function Update-Item {
 		}
 	}
 }
+function Get-Env {
+	Get-ChildItem Env:*$args*
+}
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
 New-Alias -Name touch -Value Update-Item
-Export-ModuleMember -Function Start-fishShell, Get-AllItem, Update-Item
-Export-ModuleMember -Alias fish, ll, la, touch
+New-Alias -Name env -Value Get-Env
+Export-ModuleMember -Function Start-fishShell, Get-AllItem, Update-Item, Get-Env
+Export-ModuleMember -Alias fish, ll, la, touch, env
