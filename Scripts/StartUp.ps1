@@ -6,8 +6,7 @@ New-Item -path $HOME -Name bat_commands -ItemType Junction -Value $Onedrive\vsco
 #Powershell Core
 New-Item -Path $HOME\Documents\ -Name Powershell -ItemType Junction -Value $OneDrive\vscode\PowerShell\
 #Windows PowerShell
-New-Item -Path $HOME\Documents\ -Name WindowsPowerShell -ItemType Junction -Value $OneDrive\vscode\WindowsPowerShell
-New-Item -Path $HOME\Documents\WindowsPowerShell -Name Modules -ItemType Junction -Value $OneDrive\vscode\PowerShell\Modules
+New-Item -Path $HOME\Documents\WindowsPowerShell -Name Microsoft.PowerShell_profile.ps1 -ItemType SymbolicLink -Value $OneDrive\vscode\PowerShell\Windows\Microsoft.PowerShell_profile.ps1
 
 #標準プリインストールアプリを削除
 Get-Appxpackage -Name *Microsoft.ZuneMusic* | Remove-Appxpackage
@@ -40,4 +39,3 @@ scoop install pwsh
 scoop install python
 scoop install ruby
 scoop install rufus
-
