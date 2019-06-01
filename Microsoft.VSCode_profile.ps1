@@ -1,4 +1,3 @@
-#helpコマンドが文字化けを起こすので治るまでUTF-8にしない
 chcp 65001
 
 #起動時のフォルダーを取得
@@ -15,7 +14,7 @@ $ESC = [char]27
 #promptの修正
 function prompt() {
 	[string]$Prompt = Get-Location
-	"$ESC[32m" + ($Prompt.Replace($HOME, "$ESC[0m~$ESC[32m")) + "$ESC[0m>"
+	"$ESC[32m" + ($Prompt.Replace($HOME, "~$ESC[32m")) + "$ESC[0m>"
 }
 
 # 起動時のコメント
