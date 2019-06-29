@@ -7,8 +7,12 @@ Set-Variable -Scope "Global" -Option "Constant" -Name "StartFolder" -Value $PWD
 Set-PSReadlineOption -BellStyle None
 
 #おまじない
-Get-ChildItem $HOME\OneDrive\vscode\PowerShell\Modules | Import-Module
 #ESC文字の登録(文字色の変換に使う)
+Import-Module New-ModuleSet
+Import-Module wsl-comannds
+Import-Module Get-StartFolder
+Import-Module Search-Location
+Import-Module posh-vagrant
 $ESC = [char]27
 
 #promptの修正
