@@ -23,7 +23,10 @@ function Get-AllItem {
 }
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
-
+function Get-Env {
+	Get-ChildItem Env:*$args*
+}
+New-Alias -Name printenv -Value Get-Env
 #ESC文字の登録(文字色の変換に使う)zzglobal:Get-AllItem
 $ESC = [char]27
 #promptの修正
