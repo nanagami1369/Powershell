@@ -21,5 +21,8 @@ function prompt() {
 	"$ESC[32m" + ($Prompt.Replace($HOME, "~$ESC[32m")) + "$ESC[0m>"
 }
 
+#キーバインドをEmacs風に
+Set-PSReadLineOption -EditMode Emacs
+
 # 起動時のコメント
 Write-Host "Welcome to my PowerShell.exe" -ForegroundColor Blue
