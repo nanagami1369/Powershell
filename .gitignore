@@ -2,3 +2,7 @@ posh-git/
 posh-vagrant
 .vscode/
 powershell.config.json
+PackageManagement
+PowerShellGet
+scoop-completion
+posh-dotnet
