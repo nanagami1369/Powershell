@@ -3,15 +3,15 @@ function New-ModuleSet {
 		[Parameter(Mandatory = $true)]
 		$ModuleName
 	)
-	$moduleDir = "$HOME\OneDrive\vscode\PowerShell\$ModuleName"
+	$moduleDir = "$HOME\Documents\PowerShell\$ModuleName"
 	if (Test-Path $moduleDir) {
 		"This Module is Existing"
 		break 1
 	}
 	# モジュールフォルダーへ移動
-	Set-Location "$HOME\OneDrive\vscode\PowerShell\Modules"
+	Set-Location "$HOME\Documents\PowerShell\Modules"
 	# 作成
-	mkdir "$HOME\OneDrive\vscode\PowerShell\Modules\$ModuleName"
+	mkdir "$HOME\Documents\PowerShell\Modules\$ModuleName"
 	Set-Location "$ModuleName"
 	New-Item -Name "$ModuleName.psm1"
 }
