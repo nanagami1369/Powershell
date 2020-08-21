@@ -38,6 +38,7 @@ function Get-AllItem {
 }
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
+New-Alias .. cd..
 function Get-Env {
 	Get-ChildItem Env:*$args*
 }
