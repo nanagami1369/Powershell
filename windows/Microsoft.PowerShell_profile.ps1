@@ -43,12 +43,19 @@ function Get-Env {
 	Get-ChildItem Env:*$args*
 }
 New-Alias -Name printenv -Value Get-Env
-#ESC文字の登録(文字色の変換に使う)zzglobal:Get-AllItem
 $ESC = [char]27
+$ESCColor = [string]"[32m"
+$promptFront = [char]'>'
+if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+	$ESCColor = [string]"[31m"
+	$promptFront = [char]'#'
+}
+
 #promptの修正
 function prompt() {
 	[string]$Prompt = Get-Location
-	"$ESC[32m" + ($Prompt.Replace($HOME, "~$ESC[32m")) + "$ESC[0m>"
+	"$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
 }
+
 #キーバインドをEmacs風に
 Set-PSReadLineOption -EditMode Emacs
