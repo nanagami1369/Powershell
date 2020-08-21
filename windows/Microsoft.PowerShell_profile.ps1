@@ -1,3 +1,6 @@
+#tmpフォルダーへアクセスしやすくする
+Set-Variable -Scope "Global" -Option "Constant" -Name "TMP" -Value $env:TMP
+
 #起動時のエラー音を削除
 Set-PSReadlineOption -BellStyle None
 #関数読み込み
