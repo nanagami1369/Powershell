@@ -1,5 +1,3 @@
-chcp 65001
-
 #起動時のフォルダーを取得
 Set-Variable -Scope "Global" -Option "Constant" -Name "StartFolder" -Value $PWD
 
