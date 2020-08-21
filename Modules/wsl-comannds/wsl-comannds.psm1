@@ -33,10 +33,19 @@ function Update-Item {
 	}
 }
 
+# 注意scoopをインストールしてないと動かない
+function Search-Location {
+	param (
+		[string]$FilePath = ""
+	)
+	scoop which $FilePath;
+}
+
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
 New-Alias -Name touch -Value Update-Item
 New-Alias -Name printenv -Value Get-Env
 New-Alias  .. cd..
-Export-ModuleMember -Function Start-fishShell, Get-AllItem, Get-Env, Update-Item
-Export-ModuleMember -Alias fish, ll, la, printenv, .., touch
+New-Alias -Name whith -Value Search-Location
+Export-ModuleMember -Function Start-fishShell, Get-AllItem, Get-Env, Update-Item, Search-Location
+Export-ModuleMember -Alias fish, ll, la, printenv, .., touch, whith
