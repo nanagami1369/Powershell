@@ -6,3 +6,4 @@ PackageManagement
 PowerShellGet
 scoop-completion
 posh-dotnet
+PSReadLine/
