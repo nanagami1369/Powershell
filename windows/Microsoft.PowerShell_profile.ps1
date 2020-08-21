@@ -59,5 +59,9 @@ function prompt() {
 
 #キーバインドをEmacs風に
 Set-PSReadLineOption -EditMode Emacs
+
+#補完をtabで出来るように
+Set-PSReadlineKeyHandler -Chord tab -Function MenuComplete
+
 # 起動時のコメント
 Write-Host "Welcome to my PowerShell.exe" -ForegroundColor Blue
