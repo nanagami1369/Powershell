@@ -5,6 +5,5 @@ powershell.config.json
 PackageManagement
 PowerShellGet
 scoop-completion
-posh-dotnet
 PSReadLine/
 PrivateScript/
