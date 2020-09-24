@@ -39,6 +39,8 @@ function prompt() {
 	[string]$Prompt = Get-Location
 	"$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
 }
+$DefaultUser = 'morihaya'
+Set-Theme Agnoster
 
 #キーバインドをEmacs風に
 Set-PSReadLineOption -EditMode Emacs
