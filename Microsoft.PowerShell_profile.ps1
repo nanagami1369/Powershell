@@ -7,7 +7,12 @@ Set-Variable -Scope "Global" -Option "Constant" -Name "TMP" -Value $env:TMP
 Set-PSReadlineOption -BellStyle None
 
 #おまじない
-Get-ChildItem (Join-Path $PSScriptRoot \Modules) | Import-Module
+if ($PSVersionTable.Platform -eq "Win32NT") {
+	Get-ChildItem (Join-Path $PSScriptRoot \Modules) | Import-Module
+}
+if ($PSVersionTable.Platform -eq "Unix") {
+	Get-ChildItem "$HOME/.local/share/powershell/Modules" | Import-Module
+}
 
 # PowerShell parameter completion shim for the dotnet CLI
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
@@ -28,16 +33,27 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 #promptの修正
-$ESC = [char]27
-$ESCColor = [string]"[32m"
-$promptFront = [char]'>'
-if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-	$ESCColor = [string]"[31m"
-	$promptFront = [char]'#'
-}
-function prompt() {
+function promptSetting {
+	$ESC = [char]27
+	$ESCColor = [string]"[32m"
+	$promptFront = [char]'>'
+	if ($PSVersionTable.Platform -eq "Win32NT") {
+		if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+			$ESCColor = [string]"[31m"
+			$promptFront = [char]'#'
+		}
+	}
+	if ($PSVersionTable.Platform -eq "Unix") {
+		if ($env:USER -eq "root") {
+			$ESCColor = [string]"[31m"
+			$promptFront = [char]'#'
+		}
+	}
 	[string]$Prompt = Get-Location
 	"$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
+}
+function prompt() {
+	promptSetting
 }
 if ((Get-Module oh-my-posh).length -eq 1) {
 	$DefaultUser = 'morihaya'
