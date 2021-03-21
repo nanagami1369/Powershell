@@ -33,27 +33,29 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 #promptの修正
+function isAdmin {
+    if ($PSVersionTable.Platform -eq "Win32NT") {
+        return	([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")
+    }
+    if ($PSVersionTable.Platform -eq "Unix") {
+        return $env:USER -eq "root"
+    }
+    return false;
+}
+
 function promptSetting {
-	$ESC = [char]27
-	$ESCColor = [string]"[32m"
-	$promptFront = [char]'>'
-	if ($PSVersionTable.Platform -eq "Win32NT") {
-		if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-			$ESCColor = [string]"[31m"
-			$promptFront = [char]'#'
-		}
-	}
-	if ($PSVersionTable.Platform -eq "Unix") {
-		if ($env:USER -eq "root") {
-			$ESCColor = [string]"[31m"
-			$promptFront = [char]'#'
-		}
-	}
-	[string]$Prompt = Get-Location
-	"$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
+    $ESC = [char]27
+    $ESCColor = [string]"[32m"
+    $promptFront = [char]'>'
+    if (isAdmin) {
+        $ESCColor = [string]"[31m"
+        $promptFront = [char]'#'
+    }
+    [string]$Prompt = Get-Location
+    "$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
 }
 function prompt() {
-	promptSetting
+    promptSetting
 }
 
 #キーバインドをEmacs風に
