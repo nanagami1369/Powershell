@@ -55,10 +55,6 @@ function promptSetting {
 function prompt() {
 	promptSetting
 }
-if ((Get-Module oh-my-posh).length -eq 1) {
-	$DefaultUser = 'morihaya'
-	Set-Theme Agnoster
-}
 
 #キーバインドをEmacs風に
 Set-PSReadLineOption -EditMode Emacs
