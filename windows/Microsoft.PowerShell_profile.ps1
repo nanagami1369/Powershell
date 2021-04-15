@@ -1,5 +1,5 @@
 #tmpフォルダーへアクセスしやすくする
-Set-Variable -Scope "Global" -Option "Constant" -Name "TMP" -Value $env:TMP
+Set-Variable -Scope 'Global' -Option 'Constant' -Name 'TMP' -Value $env:TMP
 
 #起動時のエラー音を削除
 Set-PSReadlineOption -BellStyle None
@@ -44,10 +44,10 @@ function Get-Env {
 }
 New-Alias -Name printenv -Value Get-Env
 $ESC = [char]27
-$ESCColor = [string]"[32m"
+$ESCColor = [string]'[32m'
 $promptFront = [char]'>'
-if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-	$ESCColor = [string]"[31m"
+if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+	$ESCColor = [string]'[31m'
 	$promptFront = [char]'#'
 }
 
@@ -64,4 +64,4 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Chord tab -Function MenuComplete
 
 # 起動時のコメント
-Write-Host "Welcome to my PowerShell.exe" -ForegroundColor Blue
+Write-Host 'Welcome to my PowerShell.exe' -ForegroundColor Blue
