@@ -37,4 +37,13 @@ function Remove-NoneImagesForDocker {
     docker image ls | ForEach-Object { if ($_ -match '<none>') { ($_ -split '\s\s*')[2] } } | ForEach-Object { docker image rm $_ }
 }
 
-Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker
+#他人にシェルを見せる場合にプロンプトからパス情報を消す関数
+function Set-SecretPrompt {
+    function global:prompt() {
+        $ESC = [char]27
+        $ESCColor = [string]'[32m'
+        $promptFront = [char]'>'
+        return "$ESC$ESCColor" + '~/sample' + "$ESC[0m$promptFront"
+    }
+}
+Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt
