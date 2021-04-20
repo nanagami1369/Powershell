@@ -46,4 +46,38 @@ function Set-SecretPrompt {
         return "$ESC$ESCColor" + '~/sample' + "$ESC[0m$promptFront"
     }
 }
-Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt
+
+#ビデオから音声を抜き出す関数
+# 注意ffmpegをインストールしていないと使えない
+function Get-AudioFromVideo {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $true
+        )]
+        [ValidateNotNullOrEmpty()]
+        [string]$path
+    )
+    $movie = Get-Item $path
+    $codic = Get-AudioCodicFromVideo $movie.FullName
+    $extension = $codic
+    if ($codic -eq 'aac') {
+        $extension = 'm4a'
+    }
+    $outputFilePath = $movie.Directory.ToString() + '\' + $movie.BaseName + '.' + $extension
+    ffmpeg.exe -i $movie.FullName -acodec copy $outputFilePath
+}
+
+function Get-AudioCodicFromVideo {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $true
+        )]
+        [ValidateNotNullOrEmpty()]
+        [string]$path
+    )
+    (ffmpeg.exe -i $path 2>&1 | Select-String 'Stream' | Select-String 'Audio')[0].Line -match '(?<=Audio: )[A-za-z0-9]*' > $null
+    return $Matches[0]
+}
+Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo
