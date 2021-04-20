@@ -33,16 +33,6 @@ function Update-Item {
 	}
 }
 
-# 注意scoopをインストールしてないと動かない
-function Search-Location {
-    [CmdletBinding()]
-	param (
-		[string]$FilePath = ""
-	)
-    return (Get-Item $FilePath).FullName
-}
-
-}
 
 New-Alias la Get-AllItem
 New-Alias ll Get-ChildItem
