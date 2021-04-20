@@ -33,10 +33,10 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 
 #promptの修正
 $ESC = [char]27
-$ESCColor = [string]"[32m"
+$ESCColor = [string]'[32m'
 $promptFront = [char]'>'
-if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-	$ESCColor = [string]"[31m"
+if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+	$ESCColor = [string]'[31m'
 	$promptFront = [char]'#'
 }
 function prompt() {
@@ -51,4 +51,4 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Chord tab -Function MenuComplete
 
 # 起動時のコメント
-Write-Host "Welcome to my PowerShell"$Host.Version.ToString() -ForegroundColor Blue
+Write-Host 'Welcome to my PowerShell'$Host.Version.ToString() -ForegroundColor Blue
