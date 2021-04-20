@@ -1,6 +1,8 @@
 function New-ModuleSet {
     Param(
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [String]
         $ModuleName
     )
     $moduleDir = "$HOME\Documents\PowerShell\$ModuleName"
