@@ -39,6 +39,5 @@ New-Alias ll Get-ChildItem
 New-Alias -Name touch -Value Update-Item
 New-Alias -Name printenv -Value Get-Env
 New-Alias .. cd..
-New-Alias -Name whith -Value Search-Location
-Export-ModuleMember -Function Start-fishShell, Get-AllItem, Get-Env, Update-Item, Search-Location
+Export-ModuleMember -Function Start-fishShell, Get-AllItem, Get-Env, Update-Item
 Export-ModuleMember -Alias fish, ll, la, printenv, .., touch, whith
