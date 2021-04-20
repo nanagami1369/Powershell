@@ -1,3 +1,4 @@
+#新しいモジュールを作る関数
 function New-ModuleSet {
     Param(
         [Parameter(Mandatory = $true)]
