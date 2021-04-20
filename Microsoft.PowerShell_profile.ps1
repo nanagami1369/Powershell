@@ -1,5 +1,9 @@
-#起動時のフォルダーを取得
+#起動時のフォルダーへアクセスしやすくする
 Set-Variable -Scope 'Global' -Option 'Constant' -Name 'StartFolder' -Value $PWD
+function global:Get-StartFolder {
+	Set-Location $StartFolder
+}
+New-Alias -Name ads -Value Get-StartFolder
 
 #tmpフォルダーへアクセスしやすくする
 Set-Variable -Scope 'Global' -Option 'Constant' -Name 'TMP' -Value $env:TMP
