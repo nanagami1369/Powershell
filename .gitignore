@@ -7,3 +7,4 @@ PowerShellGet
 scoop-completion
 PSReadLine/
 PrivateScript/
+DockerCompletion/
