@@ -41,7 +41,7 @@ if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]:
 }
 function prompt() {
 	[string]$Prompt = Get-Location
-	"$ESC$ESCColor" + ($Prompt.Replace($HOME, "~$ESC$ESCColor")) + "$ESC[0m$promptFront"
+    "$ESC$ESCColor$($Prompt.Replace($HOME, '~'))$ESC[0m$(git branch --show-current)$promptFront"
 }
 
 #キーバインドをEmacs風に
