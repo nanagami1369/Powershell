@@ -1,14 +1,14 @@
 #起動時のフォルダーへアクセスしやすくする
 Set-Variable -Scope 'Global' -Option 'Constant' -Name 'StartFolder' -Value $PWD
 function global:Get-StartFolder {
-	Set-Location $StartFolder
+    Set-Location $StartFolder
 }
 New-Alias -Name ads -Value Get-StartFolder
 
 #tmpフォルダーへアクセスしやすくする
 Set-Variable -Scope 'Global' -Option 'Constant' -Name 'TMP' -Value $env:TMP
 #起動時のエラー音を削除
-Set-PSReadlineOption -BellStyle None
+Set-PSReadLineOption -BellStyle None
 
 #おまじない
 if ($PSVersionTable.Platform -eq 'Win32NT') {
@@ -66,7 +66,7 @@ function prompt() {
 Set-PSReadLineOption -EditMode Emacs
 
 #補完をtabで出来るように
-Set-PSReadlineKeyHandler -Chord tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Chord tab -Function MenuComplete
 
 # 起動時のコメント
 Write-Host 'Welcome to my PowerShell'$Host.Version.ToString() -ForegroundColor Blue
