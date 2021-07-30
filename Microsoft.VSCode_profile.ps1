@@ -32,16 +32,14 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 #promptの修正
-$ESC = [char]27
-$ESCColor = [string]'[32m'
+$ESCColor = [string]"`e[32m"
 $promptFront = [char]'>'
 if (([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-    $ESCColor = [string]'[31m'
+    $ESCColor = [string]"`e[31m"
     $promptFront = [char]'#'
 }
 function prompt() {
-    [string]$Prompt = Get-Location
-    "$ESC$ESCColor$($Prompt.Replace($HOME, '~'))$ESC[0m$(git branch --show-current)$promptFront"
+    "$ESCColor$((Get-Location).Path.Replace($HOME, '~'))`e[0m$(git branch --show-current)$promptFront"
 }
 
 #キーバインドをEmacs風に

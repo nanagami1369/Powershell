@@ -48,15 +48,13 @@ function isAdmin {
 }
 
 function promptSetting {
-    $ESC = [char]27
-    $ESCColor = [string]'[32m'
+    $ESCColor = [string]"`e[32m"
     $promptFront = [char]'>'
     if (isAdmin) {
-        $ESCColor = [string]'[31m'
+        $ESCColor = [string]"`e[32m"
         $promptFront = [char]'#'
     }
-    [string]$Prompt = Get-Location
-    "$ESC$ESCColor$($Prompt.Replace($HOME, '~'))$ESC[0m$(git branch --show-current)$promptFront"
+    "$ESCColor$((Get-Location).Path.Replace($HOME, '~'))`e[0m$(git branch --show-current)$promptFront"
 }
 function prompt() {
     promptSetting
