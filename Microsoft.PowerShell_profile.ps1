@@ -51,7 +51,7 @@ function promptSetting {
     $ESCColor = [string]"`e[32m"
     $promptFront = [char]'>'
     if (isAdmin) {
-        $ESCColor = [string]"`e[32m"
+        $ESCColor = [string]"`e[31m"
         $promptFront = [char]'#'
     }
     "$ESCColor$((Get-Location).Path.Replace($HOME, '~'))`e[0m$(git branch --show-current)$promptFront"
