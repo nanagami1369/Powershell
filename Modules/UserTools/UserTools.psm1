@@ -61,6 +61,37 @@ function Set-PowerlinePrompt {
         powerlinePrompt
     }
 }
+
+function isAdmin {
+    if ($PSVersionTable.Platform -eq 'Win32NT') {
+        return	([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')
+    }
+    if ($PSVersionTable.Platform -eq 'Unix') {
+        return $env:USER -eq 'root'
+    }
+    return false;
+}
+
+function defaultPrompt {
+    $ESCColor = [string]"`e[32m"
+    $promptFront = [char]'>'
+    if (isAdmin) {
+        $ESCColor = [string]"`e[31m"
+        $promptFront = [char]'#'
+    }
+    "$ESCColor$((Get-Location).Path.Replace($HOME, '~'))`e[0m$(git branch --show-current)$promptFront"
+}
+function prompt() {
+    defaultPrompt
+}
+
+
+function Set-DefaultPrompt {
+    function global:prompt() {
+        promptSetting
+    }
+}
+
 #ビデオから音声を抜き出す関数
 # 注意ffmpegをインストールしていないと使えない
 function Get-AudioFromVideo {
@@ -116,4 +147,4 @@ function Get-AudioFromYoutube {
     Pop-Location
 }
 
-Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube
+Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube, Set-DefaultPrompt
