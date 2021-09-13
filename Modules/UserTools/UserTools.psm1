@@ -47,11 +47,18 @@ function Set-SecretPrompt {
     }
 }
 
+function powerlinePrompt {
+    $defaulutOutput = [System.Console]::OutputEncoding
+    [System.Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+    & "$env:GOPATH\bin\powerline-go.exe" -modules 'venv,ssh,cwd,perms,git,hg,jobs,exit' -cwd-max-depth 2 -cwd-mode semifancy
+    [System.Console]::OutputEncoding = $defaulutOutput
+}
+
 #プロンプトをPowerlinePromptに変更する
 # 注意 powerline-goをインストールしていないと使えない
 function Set-PowerlinePrompt {
     function global:prompt() {
-        & "$env:GOPATH\bin\powerline-go.exe" -modules 'venv,ssh,cwd,perms,git,hg,jobs,exit' -cwd-max-depth 2 -cwd-mode semifancy
+        powerlinePrompt
     }
 }
 #ビデオから音声を抜き出す関数
