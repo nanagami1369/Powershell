@@ -127,7 +127,7 @@ function Get-AudioCodicFromVideo {
 }
 
 # Youtubeから音声をダウンロードする関数
-# 注意 youtube-dlをインストールしていないと使えない
+# 注意 yt-dlpをインストールしていないと使えない
 function Get-AudioFromYoutube {
     param (
         [Parameter(
@@ -143,7 +143,7 @@ function Get-AudioFromYoutube {
     # 251 wabmの一番良い音質の形式
     # -x 動画コーディックから音声だけ抽出
     Push-Location $outputDirectory
-    youtube-dl.exe -f 251 -x $url.Split('&')[0]
+    yt-dlp.exe $url.Split('&')[0] -x --cookies-from-browser firefox
     Pop-Location
 }
 
