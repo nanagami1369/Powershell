@@ -147,4 +147,25 @@ function Get-AudioFromYoutube {
     Pop-Location
 }
 
-Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube, Set-DefaultPrompt
+# Youtubeから音声をダウンロードする関数
+# 注意 yt-dlpをインストールしていないと使えない
+function Get-VideoFromYoutube {
+    param (
+        [Parameter(
+            ValueFromPipeline = $false,
+            Position = 1,
+            Mandatory = $true
+        )]
+        [ValidateNotNullOrEmpty()]
+        [string]$url,
+        [ValidateNotNullOrEmpty()]
+        [String]$outputDirectory = $PWD
+    )
+    # 251 wabmの一番良い音質の形式
+    # -x 動画コーディックから音声だけ抽出
+    Push-Location $outputDirectory
+    yt-dlp.exe $url.Split('&')[0] -x --cookies-from-browser firefox
+    Pop-Location
+}
+
+Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube, Set-DefaultPrompt, Get-VideoFromYoutube
