@@ -11,8 +11,8 @@ Set-Variable -Scope 'Global' -Option 'Constant' -Name 'TMP' -Value $env:TMP
 Set-PSReadLineOption -BellStyle None
 
 #おまじない
-Get-ChildItem (Join-Path $PSScriptRoot \Modules) | Import-Module
-
+# インポートするModuleを最小限に
+Import-Module "$PSScriptRoot\Modules\wsl-comannds"
 # PowerShell parameter completion shim for the dotnet CLI
 Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
     param($commandName, $wordToComplete, $cursorPosition)

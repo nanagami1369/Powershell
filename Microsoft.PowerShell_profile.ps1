@@ -12,7 +12,9 @@ Set-PSReadLineOption -BellStyle None
 
 #おまじない
 if ($PSVersionTable.Platform -eq 'Win32NT') {
-    Get-ChildItem (Join-Path $PSScriptRoot \Modules) | Import-Module
+    # インポートするModuleを最小限に
+    Import-Module "$PSScriptRoot\Modules\scoop-completion"
+    Import-Module "$PSScriptRoot\Modules\wsl-comannds"
 }
 if ($PSVersionTable.Platform -eq 'Unix') {
     Get-ChildItem "$HOME/.local/share/powershell/Modules" | Import-Module
