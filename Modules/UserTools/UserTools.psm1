@@ -162,9 +162,8 @@ function Get-VideoFromYoutube {
         [String]$outputDirectory = $PWD
     )
     # 251 wabmの一番良い音質の形式
-    # -x 動画コーディックから音声だけ抽出
     Push-Location $outputDirectory
-    yt-dlp.exe $url.Split('&')[0] -x --cookies-from-browser firefox
+    yt-dlp.exe $url.Split('&')[0] --embed-thumbnail --cookies-from-browser firefox
     Pop-Location
 }
 
