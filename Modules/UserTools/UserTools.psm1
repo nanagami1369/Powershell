@@ -63,10 +63,10 @@ function Set-PowerlinePrompt {
 }
 
 function isAdmin {
-    if ($PSVersionTable.Platform -eq 'Win32NT') {
+    if ($IsWindows) {
         return	([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')
     }
-    if ($PSVersionTable.Platform -eq 'Unix') {
+    if ($IsLinux) {
         return $env:USER -eq 'root'
     }
     return false;
