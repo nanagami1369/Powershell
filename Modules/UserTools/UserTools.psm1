@@ -167,4 +167,32 @@ function Get-VideoFromYoutube {
     Pop-Location
 }
 
-Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube, Set-DefaultPrompt, Get-VideoFromYoutube
+function Get-DecordedUrl {
+    param (
+        [Parameter(
+            ValueFromPipeline = $false,
+            Position = 1,
+            Mandatory = $true
+        )]
+        [ValidateNotNullOrEmpty()]
+        [string]$url
+    )
+    Add-Type -AssemblyName System.Web
+    [System.Web.HttpUtility]::UrlDecode($url);
+}
+
+function Get-DecordedUnicodeString {
+    param (
+        [Parameter(
+            ValueFromPipeline = $false,
+            Position = 1,
+            Mandatory = $true
+        )]
+        [ValidateNotNullOrEmpty()]
+        [string]$value
+    )
+    [System.Text.RegularExpressions.Regex]::Unescape($value)
+}
+
+
+Export-ModuleMember -Function New-ModuleSet , Search-Location, Remove-NoneImagesForDocker, Set-SecretPrompt, Get-AudioFromVideo, Set-PowerlinePrompt, Get-AudioFromYoutube, Set-DefaultPrompt, Get-VideoFromYoutube, Get-DecordedUrl, Get-DecordedUnicodeString
