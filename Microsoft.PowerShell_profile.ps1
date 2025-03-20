@@ -15,6 +15,7 @@ if ($PSVersionTable.Platform -eq 'Win32NT') {
     # インポートするModuleを最小限に
     Import-Module "$PSScriptRoot\Modules\scoop-completion"
     Import-Module "$PSScriptRoot\Modules\wsl-comannds"
+    Import-Module "$PSScriptRoot\Modules\git-completion"
 }
 if ($PSVersionTable.Platform -eq 'Unix') {
     Get-ChildItem "$HOME/.local/share/powershell/Modules" | Import-Module
@@ -41,7 +42,7 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 #promptの修正
 function isAdmin {
     if ($PSVersionTable.Platform -eq 'Win32NT') {
-        return	([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')
+        return ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole( [Security.Principal.WindowsBuiltInRole] 'Administrator')
     }
     if ($PSVersionTable.Platform -eq 'Unix') {
         return $env:USER -eq 'root'
